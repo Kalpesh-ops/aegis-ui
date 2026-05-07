@@ -16,6 +16,7 @@ import Link from 'next/link';
 import Dropzone from '@/components/layout/Dropzone';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { API_BASE_URL } from '@/lib/api';
 
 interface Criterion {
   id: string;
@@ -42,7 +43,7 @@ export default function UploadPage() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/tenders/upload', {
+      const response = await fetch(`${API_BASE_URL}/tenders/upload`, {
         method: 'POST',
         body: formData,
       });

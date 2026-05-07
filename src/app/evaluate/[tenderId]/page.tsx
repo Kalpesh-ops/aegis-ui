@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Dropzone from '@/components/layout/Dropzone';
+import { API_BASE_URL } from '@/lib/api';
 
 export default function EvaluatePage() {
   const router = useRouter();
@@ -43,7 +44,7 @@ export default function EvaluatePage() {
     if (!params.tenderId) return;
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8000/api/v1/evaluation/report/${params.tenderId}?format=json`);
+      const res = await fetch(`${API_BASE_URL}/evaluation/report/${params.tenderId}?format=json`);
       if (!res.ok) throw new Error("Failed to fetch evaluation report");
       const data = await res.json();
       
@@ -87,7 +88,7 @@ export default function EvaluatePage() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/vendors/process', {
+      const response = await fetch(`${API_BASE_URL}/vendors/process`, {
         method: 'POST',
         body: formData,
       });
@@ -120,7 +121,7 @@ export default function EvaluatePage() {
     if (!activeCriterionId || !activeVendorId) return;
 
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/evaluation/${activeVendorId}/${activeCriterionId}/override`, {
+      const response = await fetch(`${API_BASE_URL}/evaluation/${activeVendorId}/${activeCriterionId}/override`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
