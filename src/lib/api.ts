@@ -1,6 +1,7 @@
 import { TenderCriterion, VendorEvidence } from "@/types";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
+// FORCING CLOUD RUN URL FOR HACKATHON DEMO
+export const API_BASE_URL = 'https://aegis-backend-198639880092.us-central1.run.app/api/v1';
 
 export async function uploadTender(file: File): Promise<{ tender_id: string; criteria: TenderCriterion[] }> {
   const formData = new FormData();
